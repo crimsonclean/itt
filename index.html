@@ -1,307 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Island Time Tactical</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Open+Sans&display=swap');
-
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0; padding: 0;
-    font-family: 'Open Sans', sans-serif;
-    background: #fff;
-    color: #222;
-    line-height: 1.6;
-  }
-  a {
-    color: #7f0000;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* Navigation */
-  header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: #7f0000;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-    z-index: 999;
-    box-shadow: 0 2px 5px rgba(127,0,0,0.8);
-  }
-  header .logo {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: #fff;
-  }
-  nav {
-    display: flex;
-    gap: 20px;
-  }
-  nav a {
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 8px 12px;
-    color: #fff;
-    transition: background 0.3s ease;
-  }
-  nav a:hover {
-    background: #4b0000;
-    border-radius: 4px;
-  }
-
-  /* Hero Section */
-  .hero {
-    height: 90vh;
-    background: url('https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 20px;
-    position: relative;
-    margin-top: 60px; /* offset for fixed header */
-    color: #fff;
-  }
-  /* Removed .hero::before overlay */
-
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 700px;
-  }
-  .hero h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    letter-spacing: 4px;
-    text-shadow: 0 0 5px rgba(0,0,0,0.7);
-  }
-  .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    text-shadow: 0 0 5px rgba(0,0,0,0.7);
-  }
-  .btn {
-    background: #7f0000;
-    color: #fff;
-    font-weight: 700;
-    padding: 15px 35px;
-    border: none;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: background 0.3s ease;
-  }
-  .btn:hover {
-    background: #4b0000;
-  }
-
-  /* Main content */
-  main {
-    max-width: 1100px;
-    margin: 60px auto 80px;
-    padding: 0 20px;
-  }
-
-  /* Products Section */
-  #products h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 2.8rem;
-    color: #7f0000;
-    margin-bottom: 40px;
-    text-align: center;
-  }
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 30px;
-  }
-  .product-card {
-    background: #fff;
-    border: 2px solid #7f0000;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(127,0,0,0.15);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(127,0,0,0.3);
-  }
-  .product-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-  }
-  .product-info {
-    padding: 20px;
-    flex-grow: 1;
-    color: #222;
-  }
-  .product-info h3 {
-    margin: 0 0 10px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.5rem;
-    color: #7f0000;
-  }
-  .product-info p {
-    flex-grow: 1;
-  }
-  .product-info .price {
-    margin-top: 15px;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: #7f0000;
-  }
-
-  /* About Section */
-  #about {
-    margin: 60px 0;
-    padding: 40px 20px;
-    background: #fee;
-    border-radius: 15px;
-    color: #660000;
-    text-align: center;
-    border: 2px solid #7f0000;
-  }
-  #about h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 2.8rem;
-    margin-bottom: 20px;
-  }
-  #about p {
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  /* Contact Section */
-  #contact {
-    text-align: center;
-    margin: 80px 0 0;
-    color: #222;
-  }
-  #contact h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 2.8rem;
-    color: #7f0000;
-    margin-bottom: 20px;
-  }
-  #contact p {
-    margin: 10px 0;
-    font-size: 1.1rem;
-  }
-  #contact a {
-    color: #7f0000;
-    font-weight: 700;
-  }
-
-  /* Footer */
-  footer {
-    background: #4b0000;
-    color: #fff;
-    text-align: center;
-    padding: 20px 10px;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-  }
-
-  /* Responsive */
-  @media(max-width: 480px) {
-    .hero h1 {
-      font-size: 2.5rem;
-    }
-    .btn {
-      padding: 12px 25px;
-      font-size: 1rem;
-    }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <title>Island Time Tactical</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #fffaf0; color: #333; }
+    header, footer { background: #cc5200; color: white; text-align: center; padding: 20px; }
+    nav { background: #ffa64d; padding: 10px; text-align: center; }
+    nav a { margin: 0 15px; color: #000; text-decoration: none; font-weight: bold; }
+    section { padding: 40px 20px; border-bottom: 1px solid #ccc; }
+    h1, h2 { color: #cc5200; }
+    ul { list-style: none; padding-left: 0; }
+    ul li { margin-bottom: 10px; }
+    a.button { background: #cc5200; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">Island Time Tactical</div>
+  <header>
+    <h1>Island Time Tactical</h1>
+    <p>Proudly serving Texas with expert service and a trusted selection of firearms.</p>
+  </header>
+
   <nav>
     <a href="#home">Home</a>
-    <a href="#products">Products</a>
     <a href="#about">About</a>
+    <a href="#inventory">Inventory</a>
+    <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
   </nav>
-</header>
 
-<section class="hero" id="home">
-  <div class="hero-content">
-    <h1>Gear Up. Stay Ready.</h1>
-    <p>Your trusted island source for premium firearms and tactical gear.</p>
-    <button class="btn" onclick="window.location.href='#products'">Shop Now</button>
-  </div>
-</section>
+  <section id="home">
+    <h2>Welcome to Island Time Tactical</h2>
+    <p>Your trusted Texas-based gun store with unbeatable service and selection.</p>
+    <a href="#inventory" class="button">Browse Inventory</a>
 
-<main>
-  <section id="products">
-    <h2>Our Top Products</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb22e9?auto=format&fit=crop&w=400&q=80" alt="AR-15 Tactical Rifle" />
-        <div class="product-info">
-          <h3>AR-15 Tactical Rifle</h3>
-          <p>High-performance semi-automatic rifle perfect for all tactical needs.</p>
-          <div class="price">$1,200</div>
-        </div>
-      </div>
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1581093588401-85d302f1a0af?auto=format&fit=crop&w=400&q=80" alt="9mm Pistol" />
-        <div class="product-info">
-          <h3>9mm Pistol</h3>
-          <p>Reliable and compact handgun suitable for personal defense.</p>
-          <div class="price">$650</div>
-        </div>
-      </div>
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1590080877777-f6512513e53f?auto=format&fit=crop&w=400&q=80" alt="Tactical Gear Package" />
-        <div class="product-info">
-          <h3>Tactical Gear Package</h3>
-          <p>Includes holsters, sights, and other essential accessories.</p>
-          <div class="price">$350</div>
-        </div>
-      </div>
-    </div>
+    <h3>Why Choose Us</h3>
+    <ul>
+      <li><strong>Local Texas Experts:</strong> Knowledgeable support for the Texas market.</li>
+      <li><strong>Small Business Values:</strong> Personalized service.</li>
+      <li><strong>Top-Tier Customer Service:</strong> Satisfaction guaranteed.</li>
+    </ul>
+
+    <h3>Inventory Highlights</h3>
+    <ul>
+      <li><strong>AR-15 Platform Rifle:</strong> $899</li>
+      <li><strong>9mm Handgun:</strong> $499</li>
+      <li><strong>12 Gauge Shotgun:</strong> $699</li>
+    </ul>
   </section>
 
   <section id="about">
     <h2>About Island Time Tactical</h2>
-    <p>Island Time Tactical combines island vibes with tactical expertise to provide you with premium firearms and gear. Our commitment to quality, customer service, and compliance ensures you’re always equipped and confident.</p>
+    <ul>
+      <li><strong>Locally Owned:</strong> Texas roots, community focused.</li>
+      <li><strong>Our Mission:</strong> Honesty, fairness, and quality gear.</li>
+      <li><strong>Who We Serve:</strong> From first-timers to pros, all are welcome.</li>
+    </ul>
+  </section>
+
+  <section id="inventory">
+    <h2>Full Inventory</h2>
+    <ul>
+      <li><strong>AR-15 Tactical:</strong> $899</li>
+      <li><strong>Glock 19 9mm:</strong> $539</li>
+      <li><strong>Mossberg 500 12ga:</strong> $459</li>
+      <li><strong>Ruger 10/22:</strong> $299</li>
+    </ul>
+  </section>
+
+  <section id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <ul>
+      <li><strong>Do you require background checks?</strong><br/>Yes, in accordance with federal and state laws.</li>
+      <li><strong>Can I reserve a firearm?</strong><br/>Yes, with a deposit. Contact us for details.</li>
+      <li><strong>Do you offer training?</strong><br/>Not currently, but we refer trusted partners.</li>
+    </ul>
   </section>
 
   <section id="contact">
     <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:sales@islandtimetactical.com">sales@islandtimetactical.com</a></p>
-    <p>Phone: (555) 123-4567</p>
-    <p>Location: 123 Tactical Rd, Island City</p>
+    <p>Email: <a href="mailto:paul@islandtimetactical.com">paul@islandtimetactical.com</a></p>
+    <p>Phone: <a href="tel:7135537419">713-553-7419</a></p>
   </section>
-</main>
 
-<footer>
-  <p>© 2025 Island Time Tactical. Firearms sold only to eligible customers in compliance with all applicable laws and regulations.</p>
-</footer>
+  <footer>
+    <p>&copy; 2025 Island Time Tactical – All rights reserved</p>
+  </footer>
 
 </body>
 </html>
